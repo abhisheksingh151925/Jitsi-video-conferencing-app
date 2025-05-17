@@ -2,23 +2,47 @@
 <html>
 
 <head>
-    <title>Jitsi Meet Integration</title>
+    <title>Abhishek's Jitsi Integration</title>
+    <style>
+        html,
+        body,
+        #jitsi-container {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>My Jitsi Meeting</h2>
+    <div id="jitsi-container"></div>
 
-    <div id="jitsi-container" style="height: 600px; width: 100%;"></div>
-
-    <script src='https://meet.jit.si/external_api.js'></script>
+    <script src="https://8x8.vc/external_api.js"></script>
     <script>
-        const domain = "meet.jit.si";
+        const domain = "8x8.vc";
+        const tenant = "vpaas-magic-cookie-1a5353b1c3f4437da24af15635987ee8";
+        const roomName = "AbhishekRoomDemo123";
+        const jwt = "eyJraWQiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWE1MzUzYjFjM2Y0NDM3ZGEyNGFmMTU2MzU5ODdlZTgvYTRiNzE3LVNBTVBMRV9BUFAiLCJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJqaXRzaSIsImlzcyI6ImNoYXQiLCJpYXQiOjE3NDc0NjUxODEsImV4cCI6MTc0NzQ3MjM4MSwibmJmIjoxNzQ3NDY1MTc2LCJzdWIiOiJ2cGFhcy1tYWdpYy1jb29raWUtMWE1MzUzYjFjM2Y0NDM3ZGEyNGFmMTU2MzU5ODdlZTgiLCJjb250ZXh0Ijp7ImZlYXR1cmVzIjp7ImxpdmVzdHJlYW1pbmciOnRydWUsIm91dGJvdW5kLWNhbGwiOnRydWUsInNpcC1vdXRib3VuZC1jYWxsIjpmYWxzZSwidHJhbnNjcmlwdGlvbiI6dHJ1ZSwicmVjb3JkaW5nIjp0cnVlfSwidXNlciI6eyJoaWRkZW4tZnJvbS1yZWNvcmRlciI6ZmFsc2UsIm1vZGVyYXRvciI6dHJ1ZSwibmFtZSI6ImFiaGlzaGVrc2luZ2hnbGF1bml2MjEyNSIsImlkIjoiZ29vZ2xlLW9hdXRoMnwxMDMyNTI2NzIwNjQ0NDA3Njk2OTEiLCJhdmF0YXIiOiIiLCJlbWFpbCI6ImFiaGlzaGVrc2luZ2hnbGF1bml2MjEyNUBnbWFpbC5jb20ifX0sInJvb20iOiIqIn0.NeyO5bdGlOucuro4v35EsCtw9Y0D2y_KsoZtMcsBBob5-dJB60d12lma2-tv6-2jVozmnb6UEZrxrshCT6q50Lc14dFPP5CgXPmXZw-vZr6cQ6j8rCf4nwSBJCxE370rAbP7gWXvxIyX58tJiiiz2nwupkd8JsPQqv623LXFiYUOmd39VaE8VL0aOWWKlUAcKJ5PTn2d0yObKyS8p5GxZo8l4ZCMnMjFCoaHR4kpQyo6xDpYj3IEqYgvZkHL7-gSGuyWCS-r25Kx4dKYCpp3YBQ284gYOZ4ztsAXCpDXb7Ej3qeuHd34IWkLs3PLbx6Eg_rOrTwcNNBmgYwswDZmaw";
+
         const options = {
-            roomName: "AbhishekTestRoom",
-            width: "100%",
-            height: 600,
-            parentNode: document.getElementById("jitsi-container"),
+            roomName: `${tenant}/${roomName}`,
+            parentNode: document.querySelector('#jitsi-container'),
+            jwt: jwt,
+            configOverwrite: {
+                startWithAudioMuted: false,
+                startWithVideoMuted: false,
+                fileRecordingsEnabled: true,
+                liveStreamingEnabled: true,
+            },
+            interfaceConfigOverwrite: {
+                SHOW_JITSI_WATERMARK: false,
+                SHOW_WATERMARK_FOR_GUESTS: false
+            },
+            userInfo: {
+                displayName: "Abhishek Singh"
+            }
         };
+
         const api = new JitsiMeetExternalAPI(domain, options);
     </script>
 </body>
